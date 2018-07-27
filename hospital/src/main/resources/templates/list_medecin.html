@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+	
+<link rel="stylesheet" href="/DataTable/css/dataTables.min.css"/>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+</head>
+<body>
+	<div class="container">
+		<h2>La liste des Medecins:</h2>
+		<table class="table table-striped custab" id="myTable">
+			<thead>
+				<tr>
+					<th>Matricule</th>
+					<th>Nom</th>
+					<th>Prenom</th>
+					<th>Adresse</th>
+					<th>Telephone</th>
+					<th>Date Naissance</th>
+					<th>Specialite</th>
+					<th>Service</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="m : ${lesmedecins}">
+					<td th:text="${m.matricule}"></td>
+					<td th:text="${m.nom}"></td>
+					<td th:text="${m.prenom}"></td>
+					<td th:text="${m.adresse}"></td>
+					<td th:text="${m.tel}"></td>
+					<td th:text="${m.datenais}"></td>
+					<td th:text="${m.specialite.libelle}"></td>
+					<td th:text="${m.service.libelle}"></td>
+
+					<td id="test">
+						<a class='btn btn-info btn-xs' th:href="@{/medecin/edit(id=${m.id})}"><span class="glyphicon glyphicon-edit"></span> Modifier</a> 
+						<a class="btn btn-danger btn-xs del" th:href="@{/medecin/delete(id=${m.id})}" onclick="javascript:return remove();"><span class="glyphicon glyphicon-remove"></span> Supprimer</a> 
+						<!--<input type="hidden" id="id_med" th:value="${m.id}" />-->
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous">
+  </script>
+  <script text="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.19/i18n/French.json"></script>
+  <script text="text/javascript" src="/DataTable/js/dataTables.min.js"></script>
+
+  
+	<script>
+		function remove(){
+			if(confirm('Voulez-vous vraiment supprimer ce medecin ? ')===true){
+				return true;
+			}
+			return false;
+		}
+		$(document).ready( function () {
+		    $('#myTable').DataTable();
+		} );
+	<!---->
+	<!--$(document).ready(function(){-->
+	<!--$(".custab").on("click",".del",function(){-->
+	<!--var id = document.getElementById("id_med").value;-->
+	<!--var $a = $(this);-->
+	<!--$a.parents('tr').fadeOut();-->
+	<!--if (confirm('Voulez-vous vraiment supprimer ce medecin ? ')) {-->
+	<!--$.ajax({-->
+	<!--url:'delete',-->
+	<!--method:"GET",-->
+	<!--data: 'id'+'='+id,-->
+	<!--success:function(data) {-->
+	<!--$a.parents('tr').fadeOut();-->
+	<!--}-->
+	<!--})-->
+	<!--}-->
+	<!---->
+	<!--});-->
+	<!--});-->
+
+</script>
+
+</body>
+</html>

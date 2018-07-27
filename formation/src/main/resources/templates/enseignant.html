@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Formation / Enseignant</title>
+
+<div th:include="includes/css"></div>
+
+</head>
+<body>
+	<div th:include="includes/navbar"></div>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<button type="button" class="btn btn-info pull-right"
+					data-toggle="modal" data-target="#myModal">Ajouter une
+					promotion</button>
+
+				<!-- Modal -->
+				<div id="myModal" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Enregistrer un enseignant</h4>
+							</div>
+							<div class="modal-body">
+								<form class="form-horizontal" method="post"
+									th:action="@{/Enseigant/add}" th:object="${enseignant_objet}">
+									<fieldset>
+									<input type="hidden" class="form-control" th:field="*{id}">
+										<!-- Text input-->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="textinput">Nom</label>
+											<div class="col-md-4">
+												<input id="textinput" name="textinput" type="text"
+													placeholder="saisir le nom..."
+													class="form-control input-md" required="" th:field="*{nom}">
+											</div>
+										</div>
+
+										<!-- Text input-->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="textinput">Prénom</label>
+											<div class="col-md-4">
+												<input id="textinput" name="textinput" type="text"
+													placeholder="saisir le prénom..."
+													class="form-control input-md" required="" th:field="*{prenom}">
+											</div>
+										</div>
+
+										<!-- Text input-->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="emailinput">Email</label>
+											<div class="col-md-4">
+												<input id="emailinput" name="emailinput" type="text"
+													placeholder="saisir l'email de l'enseignant"
+													class="form-control input-md" required="" th:field="*{email}">
+											</div>
+										</div>
+
+										<!-- Text input-->
+										<div class="form-group">
+											<label class="col-md-4 control-label" for="textinput">Telephone</label>
+											<div class="col-md-4">
+												<input id="textinput" name="textinput" type="text"
+													placeholder="77000000000" class="form-control input-md"
+													required="" th:field="*{tel}">
+											</div>
+										</div>
+
+										<!-- Button (Double) -->
+										<div class="form-group">
+
+											<div class="col-md-8">
+												<input value="Enregistrer" type="submit" class="btn btn-success"/>
+												<input value="Annuler" type="reset" class="btn btn-danger"/>
+											</div>
+										</div>
+
+									</fieldset>
+								</form>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<table class="table table-striped custab" id="myTable">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Date Début</th>
+							<th>Date Fin</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div th:include="includes/footer"></div>
+			</div>
+		</div>
+	</div>
+
+
+	<div th:include="includes/js"></div>
+</body>
+</html>

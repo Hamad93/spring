@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Formation / Promotion</title>
+
+<div th:include="includes/css"></div>
+
+</head>
+<body>
+	<div th:include="includes/navbar"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12" th:if="${update}">
+			<button type="button" class="btn btn-info pull-right"
+					data-toggle="modal" data-target="#myModalupdate">Ajouter une
+					promotion</button>
+				<!-- Modal -->
+				<div id="myModalupdate" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Modification</h4>
+							</div>
+							<div class="modal-body">
+								<form class="form-horizontal" method="post"
+									th:action="@{/Promotion/add}" th:object="${promotion_objet}">
+									<input type="hidden" class="form-control" th:field="*{id}">
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Date de Début</label>
+											<div class="col-sm-4">
+												<input type="date" class="form-control"
+													th:field="*{datedebut}">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Date de Fin</label>
+											<div class="col-sm-4">
+												<input type="date" class="form-control"
+													th:field="*{datefin}">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<button type="submit" class="btn btn-success">Enregistre</button>
+											</div>
+										</div>
+								</form>
+							</div>
+							
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12" th:if="!${update}">
+				<button type="button" class="btn btn-info pull-right"
+					data-toggle="modal" data-target="#myModal">Ajouter une
+					promotion</button>
+
+				<!-- Modal -->
+				<div id="myModal" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Insertion</h4>
+							</div>
+							<div class="modal-body">
+								<form class="form-horizontal" method="post"
+									th:action="@{/Promotion/add}" th:object="${promotion_objet}">
+									<input type="hidden" class="form-control" th:field="*{id}">
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Date de Début</label>
+											<div class="col-sm-4">
+												<input type="date" class="form-control"
+													th:field="*{datedebut}">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Date de Fin</label>
+											<div class="col-sm-4">
+												<input type="date" class="form-control"
+													th:field="*{datefin}">
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-sm-offset-2 col-sm-10">
+												<button type="submit" class="btn btn-success">Enregistre</button>
+											</div>
+										</div>
+								</form>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<table class="table table-striped custab" id="myTable">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Date Début</th>
+							<th>Date Fin</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="p : ${lespromotions}">
+							<td th:text="${p.id}"></td>
+							<td th:text="${p.datedebut}"></td>
+							<td th:text="${p.datefin}"></td>
+
+							<td><a class='btn btn-info btn-xs'
+								th:href="@{/Promotion/edit(id=${p.id})}" id="update"><span
+									class="glyphicon glyphicon-edi"></span> Modifier</a> 
+									<a class="btn btn-danger btn-xs del" th:href="@{/Promotion/delete(id=${p.id})}" onclick="javascript:return remove();">
+									<span class="glyphicon glyphicon-remove"></span> Supprimer</a> 
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div th:include="includes/footer"></div>
+			</div>
+		</div>
+	</div>
+	<div th:include="includes/js"></div>
+	
+	<script>
+	$( document ).ready(function() {
+	    $('#myModalupdate').modal('toggle');
+	    $('#myModalupdate').on('hidden.bs.modal', function () {
+		    url = "http://localhost:8080/Promotion";
+	    	$(location).attr('href',url)
+	    })
+	   });
+	</script>
+</body>
+</html>
